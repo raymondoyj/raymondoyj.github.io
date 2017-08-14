@@ -84,7 +84,7 @@ Summary of actions:
 
 你的功能分支会合并到`develop`分支，并且当前分支会切换回`develop`分支。 在合并的过程中, git-flow使用`git merge --no-ff feature/authentication`在你的功能分支被删除之前确保不会丢失任何历史信息。
 
-### Versioned releases
+### Versioned releases（版本发布分支）
 
 If you need tagged and versioned releases, you can use git-flow's release branches to start a new branch when you're ready to deploy a new version to production.
 
