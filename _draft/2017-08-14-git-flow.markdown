@@ -15,9 +15,9 @@ tags:
 
 [Vincent Driessen的分支模型](http://nvie.com/posts/a-successful-git-branching-model/)是一个基于git的分支管理和版本发布的策略，帮助开发人员在更大的软件项目中跟踪软件的features（功能分支），hotfixes（debug分支）和releases（发布的版本）。虽然这个工作流需要输入和记住很多命令，但是可以使用[基于git命令的git-flow库](https://github.com/nvie/gitflow)来自动化流程的某些部分，使其更容易使用。
 
-<img src="http://jeffkreeftmeijer.com/images/gitflow.gif" alt="The git-flow branching model">
+<img src="/img/in-post/post-git-flow/gitflow.gif" alt="git-flow分支模型">
 
-After [installing git-flow](https://github.com/nvie/gitflow/wiki/Installation) (`brew install git-flow`), you can start using git-flow in your repository by using it's `init` command. You can use it in existing projects, but let's start a new repository:
+[安装git-flow](https://github.com/nvie/gitflow/wiki/Installation) (`apt install git-flow`)后, 你可以在你的git仓库中使用git-flow的`init`命令。你可以在已有的仓库钟使用git-flow, 但是让我们从一个新的仓库开始吧：
 
 ```
 $ git flow init
@@ -34,9 +34,9 @@ Support branches? [support/]
 Version tag prefix? []
 ```
 
-git-flow is just a wrapper around existing git commands, so the `init` command doesn't change anything in your repository other than creating branches for you. If you don't want to use git-flow anymore, there's nothing to change or remove, you just stop using the git-flow commands.
+git-flow只是在git命令上封装了一层, 所以`init`命令除了新建分支外不会对你的仓库做任何改变。如果你不再使用git-flow，那么不需要改变或删除东西，你只要停止使用git-flow命令即可。
 
-If you run `git branch` after setting up, you'll notice that you switched from the master branch to a new one named `develop`.
+如果你在设置后运行`git branch`，你会发现你从master分支切换到名为`develop`的新分支。
 
 ```
 $ git branch
