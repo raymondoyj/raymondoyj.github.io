@@ -44,11 +44,11 @@ $ git branch
   master
 ```
 
-The `develop` branch is intended to be the default branch where most of the work will happen, and the `master` branch keeps track of production-ready code. So instead of working in the `master` branch, you'll use `git push origin develop` to push new code to your repository from now on.
+`develop`分支作为开发过程中经常使用的默认分支， `master`分支则存放可以随时部署到生产环境的代码。所以从现在开始不要将代码推送到`master`分支，你应该用`git push origin develop`推送新的代码到仓库里。
 
-### Feature branches
+### Feature branches（功能分支）
 
-git-flow makes it easy to work on multiple features at the same time by using feature branches. To start one, use `feature start` with the name of your new feature (in this case, "authentication"):
+git-flow可以通过使用feature branches來轻松地同时处理多个功能。 试一下, 用`feature start`加上新的分支名称 (比如, "authentication"):
 
 ```
 $ git flow feature start authentication
@@ -63,8 +63,8 @@ Now, start committing on your feature. When done, use:
      git flow feature finish authentication
 ```
 
-As the output already explains, you're now on a new branch you can use to work on your feature.
-Use git like you normally would, and finish the feature using `feature finish` when it's done:
+打印信息说, 你现在在一个新的分支上，你可以在分支上实现你的功能。
+在开发过程中使用通常的git命令即可，当功能开发完成时，使用`feature finish`来结束功能分支：
 
 ```
 $ git flow feature finish authentication
@@ -82,7 +82,7 @@ Summary of actions:
 - You are now on branch 'develop'
 ```
 
-Your feature branch will be merged and you're taken back to your `develop` branch. Internally, git-flow used `git merge --no-ff feature/authentication` to make sure you don't lose any hostorical information about your feature branch before it is removed.
+你的功能分支会合并到`develop`分支，并且当前分支会切换回`develop`分支。 在合并的过程中, git-flow使用`git merge --no-ff feature/authentication`在你的功能分支被删除之前确保不会丢失任何历史信息。
 
 ### Versioned releases
 
