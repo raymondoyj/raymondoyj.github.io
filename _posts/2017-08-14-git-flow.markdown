@@ -6,6 +6,7 @@ date:       2017-08-14 24:00:00
 author:     "Raymond"
 header-img: "img/post-bg-android.jpg"
 tags:
+    - 工作
     - git
     - git-flow
 ---
@@ -86,10 +87,9 @@ Summary of actions:
 
 ### Versioned releases（版本发布分支）
 
-If you need tagged and versioned releases, you can use git-flow's release branches to start a new branch when you're ready to deploy a new version to production.
+如果你需要发布版本，你可以将准备部署到生产的代码用git-flow来新建新的release分支。
 
-Like everything else in git-flow, you don't have to use release branches if you don't want to. Prefer to manually `git merge --no-ff develop` into master without tagging? No problem.
-However, if you're working on a versioned API or library, release branches might be really useful, and they work exactly like you'd expect:
+就像git-flow的其他分支一样，你也可以不使用release分支。或许更喜欢手动地用`git merge --no-ff develop`合并到master分支，这样做也没问题。然而，如果你在开发需要版本化的API或library，release分支可能会非常好用，其效果如你所愿：
 
 ```
 $ git flow release start 0.1.0
@@ -107,8 +107,7 @@ Follow-up actions:
      git flow release finish '0.1.0'
 ```
 
-Bump the version number and do everything that's required to release your project in the release branch. I personally wouldn't do any last minute fixes, but if you do, git-flow will make sure everything is correctly merged into both `master` and `develop`.
-Then, finish the release:
+当确定版本号并且在release分支做好一切版本发布的准备后，建议不要再做任何的临时修改，如果做了，git-flow会确认正确后再合并到`master`和`develop`，然后结束release分支：
 
 ```
 $ git flow release finish 0.1.0
@@ -127,15 +126,15 @@ Summary of actions:
 - Release branch 'release/0.1.0' has been deleted
 ```
 
-Boom. git-flow pulls from origin, merges the release branch into master, tags the release and back-merges everything back into develop before removing the release branch.
+好了。 git-flow从origin拉取最新更改，再合并release分支到master，创建release标签并将release分支合并回develop，最后将release分支删除。
 
-You're still on master, so you can deploy before going back to your `develop` branch, which git-flow made sure to update with the release changes in `master`.
+你目前处于master分支。git-flow确保了更改的内容都更新到`master`。你可以部署`master`后再切换回`develop`。
 
-### Hotfixing production code
+### Hotfixing production code（紧急修复分支）
 
-Because you keep your `master` branch always in sync with the code that's on production, you'll be able to quickly fix any issues on production.
+因为你确保你的`master`分支的代码总是和生产的代码同步，所以你可以快速地修复在生产上发现的问题。
 
-For example, if your assets aren't loading on production, you'd roll back your deploy and start a hotfix branch:
+例如，你的assets没有在生产正常加载，你将回滚部署并启动紧急修复分支：
 
 ```
 $ git flow hotfix start assets
@@ -153,8 +152,8 @@ Follow-up actions:
      git flow hotfix finish 'assets'
 ```
 
-Hotfix branches are a lot like release branches, except they're based on master instead of develop. You're automatically switched to the new hotfix branch so you can start fixing the issue and bumping the minor version number.
-When you're done, `hotfix finish`:
+Hotfix分支很想release分支，除了前者基于master分支，后者基于develop分支。你将自动切换到新的hotfix分支，开始修复问题并发布次要版本号。
+当你完成后，执行`hotfix finish`:
 
 ```
  $ git flow hotfix finish assets
@@ -178,8 +177,8 @@ Summary of actions:
 - Hotfix branch 'hotfix/assets' has been deleted
 ```
 
-Like when finishing a release branch, the hotfix branch gets merged into both `master` and `develop`. The release is tagged and the hotfix branch is removed.
+像完成release分支一样，hotfix分支会合并到`master`和`develop`，创建新标签和删除hotfix分支。
 
-### Why aren't you using git-flow?
+### 为何不尝试git-flow?
 
-Of course, if you're [not doing versioned releases](http://scottchacon.com/2011/08/31/github-flow.html), Vincent's git workflow and the git-flow library might not be a right fit for you. However, if you work on a project that's [semantically versioned](http://semver.org), like a Rubygem or a versioned API, git-flow will give you a couple of simple commands that will do a lot of work under the hood, making working on features, pushing new releases and hotfixing bugs a lot easier. Well, at leat on the git side.
+当然，如果你[没有做版本控制](http://scottchacon.com/2011/08/31/github-flow.html), Vincent的git的工作流和git-flow库可能不适合你。但是, 如果你在开发基于[语义化版本](http://semver.org)的项目, 像Rubygem或者版本化的API, git-flow提供了几个简单的命令，这些命令封装了很多流程化的工作，使管理功能、推送新版本和修复bug变得很容易。Well, at leat on the git side.
