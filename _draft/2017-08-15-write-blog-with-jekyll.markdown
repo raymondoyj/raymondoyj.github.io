@@ -21,6 +21,8 @@ tags:
 
 ## 选择模板
 
+jekyll
+
 ## 安装Jekyll
 
 Jekyll是Ruby的程序，接下在会在ubuntu系统上一步一步地安装Jekyll。
