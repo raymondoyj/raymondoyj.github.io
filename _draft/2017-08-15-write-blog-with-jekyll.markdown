@@ -1,68 +1,157 @@
 ---
 layout:     post
-title:      "「知乎」为什么阿里系软件体验都不好？"
-subtitle:   "或许这就是所谓的企业 DNA "
-date:       2014-10-1 12:00:00
-author:     "Hux"
+title:      "搭建博客"
+subtitle:   "用jekyll搭建博客"
+date:       2017-08-15 12:00:00
+author:     "Raymond"
 header-img: "img/post-bg-alibaba.jpg"
 tags:
-    - 知乎
-    - 阿里巴巴
-    - 交互设计
+    - blog
+    - jekyll
+    - markdown
+    - git
 ---
 
-> 这篇文章转载自[我在知乎上的回答](http://www.zhihu.com/question/25657351/answer/31278511)
+> 按照惯例，在开始写博客的时候，都会写一篇如何搭建blog的指导教程:smile:。  
+> 本篇文章所搭建的博客是用[git](/2017/08/15/git-flow/)管理，用[markdown](/2015/07/31/Markdown-Syntax-CN/)写blog，用jekyll作为本地调式环境。
+
+## 什么是Jekyll
+
+[Jekyll][jekyll]是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll恰好是GitHub Pages的运行引擎，也就是说，你可以使用[GitHub Pages][github pages]的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。除了Github Pages外，还可以选择[码云Pages][码云Pages]来托管博客。
+
+## 选择模板
+
+## 安装Jekyll
+
+Jekyll是Ruby的程序，接下在会在ubuntu系统上一步一步地安装Jekyll。
+
+### 安装RVM
+
+[RVM][rvm]是一个命令行工具，它可以让你轻松的安装，管理和使用多个Ruby环境。
+
+第一步，安装mpapis公钥，用于验证安装包，确保其安全。
+
+```shell
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+```
+
+第二步，安装RVM稳定版
+
+```shell
+\curl https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer | bash -s stable
+```
+
+// TODO 配置rvm in zsh
+
+### 安装Ruby
+
+[Ruby][Ruby]是一种编程语言。
+
+列出ruby的所有可安装的版本：
+
+```shell
+rvm list known
+# MRI Rubies
+[ruby-]1.8.6[-p420]
+[ruby-]1.8.7[-p374]
+[ruby-]1.9.1[-p431]
+[ruby-]1.9.2[-p320]
+[ruby-]1.9.3[-p545]
+[ruby-]2.0.0-p353
+[ruby-]2.0.0[-p451]
+[ruby-]2.1[.1]
+[ruby-]2.1-head
+ruby-head
+...
+```
+
+安装Ruby的最新稳定版本（如：2.1.1）：
+
+```shell
+rvm install 2.1.1
+Checking requirements for opensuse.
+Requirements installation successful.
+Installing Ruby from source to: /home/mpapis/.rvm/rubies/ruby-2.1.1, this may take a while depending on your cpu(s)...
+...
+Install of ruby-2.1.1 - #complete
+Using /home/mpapis/.rvm/gems/ruby-2.1.1
+```
 
 
-<div >
-    <br>
-    <br><b>一言以蔽之，优先级。</b>
-    <br>这个优先级并不是由谁或者哪个Boss定的，而是<b>长期的市场竞争和业务需求下的结果</b>
-    <br>
-    <br>
-    <ul>
-        <li><b>为什么企鹅家的App用户体验较好？</b>
-        </li>
-    </ul>
-    企鹅家的主力产品，QQ、微信、QQ音乐、QQ空间 等，多是IM（即时通讯）、SNS（社交网络）、数字娱乐 等形态的产品。
-    <br>
-    <br><b>这类产品往往必须「直接依靠优秀的产品服务与用户体验」来赢得用户。</b>
-    <br>
-    <br>如果这点做不好，产品就无法在竞争中脱颖而出。这也使得在企鹅内部，<b>围绕这部分的要求，需求，反馈 </b><b>都一定最多，使得企鹅不得不把这部分做好</b>。
-    <br>
-    <br>
-    <ul>
-        <li><b>那为什么阿里系的App用户体验较差？</b>
-        </li>
-    </ul>
-    阿里系的主力产品，从1688、淘宝、再到支付宝、天猫、淘宝旅行、淘点点、一淘、旺旺，要么是电商类产品，要么就是电商类的延伸产品。
-    <br>
-    <br>而这类产品的核心竞争力（或者说要做好的难处），往往在<b>「如何与实体经济，甚至政府 打交道」、</b><b>「如何做好运营」，</b>而非优秀的用户体验。
-    <br>
-    <br>应该说，阿里从来都不是不重视用户体验，这两年更是愈发重视。但是因为身处这样的市场环境，<b>阿里必须先完成这些优先级更高的需求（海量的业务，运营需求）以抢占市场，</b>
-    <br>这才导致阿里内部无法有太多精力focus到客户端体验上。
-    <br>
-    <br>
-    <br>
-    <br>上面就算基本回答了题主的问题，
-    <br>不过，知乎惯例，多说几句：
-    <br>
-    <br><b>其实，上面的答案，也可以说这都是说辞。</b>
-    <br>
-    <br>在我刚刚加入阿里的时候，我也一度纳闷甚至郁闷这个事。直到我开始接触更多的项目，我才能逐渐理解「为什么会这样」。
-    <br>
-    <br><b>但是，这并不足以成为借口。</b>
-    <br><b>该不该改？ 当然该改。</b>
-    <br>
-    <br>我相信几乎所有阿里人，尤其UED，肯定都不希望这样。
-    <br>只能说，这需要阿里投入更多的人、更多的时间、更多的努力来做好
-    <br>
-    <br>
-    <br>
-    <br>以上。
-    <br>
-    <br>利益相关：
-    <br>阿里员工
-    <br>
-    <br>
-</div>
+使用新安装的Ruby：
+
+```shell
+rvm use 2.1.1
+Using /home/mpapis/.rvm/gems/ruby-2.1.1
+```
+
+检查是否运行正常：
+
+```shell
+ruby -v
+ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-linux]
+
+which ruby
+/home/mpapis/.rvm/rubies/ruby-2.1.1/bin/ruby
+```
+
+### 安装RubyGems  
+
+[RubyGems][RubyGems]（简称 gems）是一个用于对 Ruby组件进行打包的 Ruby 打包系统。 它提供一个分发 Ruby 程序和库的标准格式，还提供一个管理程序包安装的工具。
+
+1. [下载RubyGems](https://rubygems.org/pages/download)
+1. 解压并cd进去
+1. 用`ruby setup.rb`安装RubyGems
+1. 检查是否安装成功，`gem -v`
+1. 用国内的RubyGems镜像代替官方版本
+    ```shell
+    $ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+    $ gem sources -l
+    https://gems.ruby-china.org
+    # 确保只有 gems.ruby-china.org
+    ```
+
+
+### 安装Bundler
+
+[Bundler][bundler]是用来保证Ruby项目一致性的工具。Bundler在这里不是必须要的。
+
+执行命令安装：
+
+```shell
+$ gem install bundler
+```
+
+在项目的根目录编写`Gemfile`文件来指定依赖：
+
+```
+source 'https://rubygems.org'
+gem "jekyll"
+gem "jekyll-paginate"
+```
+
+使用国内的镜像：
+
+```shell
+$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+```
+
+这样你不用改你的 Gemfile 的 source。  
+执行命令安装依赖：
+```shell
+$ bundle install
+```
+
+
+## 参考链接
+
+1. [https://rvm.io/][rvm]
+1.
+
+[jekyll]: http://jekyllrb.com/ "Jekyll"
+[码云Pages]: http://git.mydoc.io/?t=154714  "码云Pages"
+[github pages]: https://pages.github.com/ "Github Pages"
+[rvm]: https://rvm.io/ "RVM"
+[Ruby]: https://www.ruby-lang.org/zh_cn/ "Ruby"
+[RubyGems]: https://rubygems.org/ "RubyGems"
+[bundler]: https://bundler.io/ "bundler"
