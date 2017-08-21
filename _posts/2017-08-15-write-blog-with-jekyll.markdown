@@ -39,7 +39,7 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 \curl https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer | bash -s stable
 ```
 
-// TODO 配置rvm in zsh
+> 如果你使用的不是bash，可能使用zsh或fish，可以在rvm官网或stackoverflow上找到适合的配置方式。
 
 ### 安装Ruby
 
@@ -74,7 +74,6 @@ Installing Ruby from source to: /home/mpapis/.rvm/rubies/ruby-2.1.1, this may ta
 Install of ruby-2.1.1 - #complete
 Using /home/mpapis/.rvm/gems/ruby-2.1.1
 ```
-
 
 使用新安装的Ruby：
 
@@ -163,9 +162,25 @@ _到这里，jekyll的环境就完成了_。
 
 ## Jekyll的基本用法
 
-jekyll的基本用法看[官方的文档][usage]就可以了
+jekyll的基本用法看[官方的文档][usage]就可以了。
 
-## 
+## 托管发布
+
+托管发布教程看[github][github pages]或[gitee][码云Pages]就可以了。  
+如无意外，你的博客已经可以查看了。  
+除了上面的发布流程外，我们还可以通过Netlify发布，而且Netlify支持https协议。
+
+## 自定义域名
+
+除了gitee外，github pages和Netlify支持自定义域名，详情可以在相关的托管发布教程里看到。
+
+## 评论系统
+
+国内的多说和网易云跟帖都关闭了，disqus在国内又不稳定，所以我选择了[gitment][gitment]，gitment是使用github账户登录的，比较适合像我这样的技术博客。
+
+## emoji插件
+
+
 
 ## 参考链接
 
@@ -176,6 +191,8 @@ jekyll的基本用法看[官方的文档][usage]就可以了
 1. [http://jekyllrb.com/][jekyll]
 1. [https://pages.github.com/][github pages]
 1. [http://git.mydoc.io/?t=154714][码云Pages]
+1. [https://www.netlify.com/][netlify]
+1. [https://github.com/imsun/gitment][gitment]
 
 [jekyll]: http://jekyllrb.com/ "Jekyll"
 [码云Pages]: http://git.mydoc.io/?t=154714  "码云Pages"
@@ -188,3 +205,5 @@ jekyll的基本用法看[官方的文档][usage]就可以了
 [jekyllthemes]: http://jekyllthemes.org/ "jekyllthemes"
 [structure]: https://jekyllrb.com/docs/structure/ "structure"
 [usage]: https://jekyllrb.com/docs/usage/ "usage"
+[netlify]: https://www.netlify.com/ "netlify"
+[gitment]: https://github.com/imsun/gitment "gitment"
