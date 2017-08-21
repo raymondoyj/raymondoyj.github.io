@@ -1,3 +1,6 @@
+plugins:
+   - jemoji
+
 # Site settings
 title: Raymond Blog
 SEOTitle: 区杰的博客 | Raymond Blog
