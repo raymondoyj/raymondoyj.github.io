@@ -1,5 +1,9 @@
+# plugins
 plugins:
-   - jemoji
+  - jemoji
+
+gems:
+  - jemoji
 
 # Site settings
 title: Raymond Blog

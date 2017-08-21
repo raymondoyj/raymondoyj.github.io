@@ -184,6 +184,7 @@ github pages支持jemoji :apple: 插件，在[github help][jekyll-plugins]有说
 
 :smile:  
 :apple:
+:+1:
 
 ## 参考链接
 
