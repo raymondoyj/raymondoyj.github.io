@@ -180,7 +180,10 @@ jekyll的基本用法看[官方的文档][usage]就可以了。
 
 ## emoji插件
 
+github pages支持jemoji :apple: 插件，在[github help][jekyll-plugins]有说明如何添加jekyll插件。
 
+:smile:  
+:apple:
 
 ## 参考链接
 
@@ -207,3 +210,4 @@ jekyll的基本用法看[官方的文档][usage]就可以了。
 [usage]: https://jekyllrb.com/docs/usage/ "usage"
 [netlify]: https://www.netlify.com/ "netlify"
 [gitment]: https://github.com/imsun/gitment "gitment"
+[jekyll-plugins]: https://help.github.com/articles/configuring-jekyll-plugins/ "jekyll-plugins"
