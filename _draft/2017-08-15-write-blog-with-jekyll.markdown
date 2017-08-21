@@ -19,10 +19,6 @@ tags:
 
 [Jekyll][jekyll]是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll恰好是GitHub Pages的运行引擎，也就是说，你可以使用[GitHub Pages][github pages]的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。除了Github Pages外，还可以选择[码云Pages][码云Pages]来托管博客。
 
-## 选择模板
-
-jekyll
-
 ## 安装Jekyll
 
 Jekyll是Ruby的程序，接下在会在ubuntu系统上一步一步地安装Jekyll。
@@ -113,10 +109,9 @@ which ruby
     # 确保只有 gems.ruby-china.org
     ```
 
+### 用Bundler管理Jekyll项目
 
-### 安装Bundler
-
-[Bundler][bundler]是用来保证Ruby项目一致性的工具。Bundler在这里不是必须要的。
+[Bundler][bundler]是用来保证Ruby项目一致性的工具。Bundler在这里不是必须要的。因为我们可以用`gem install jekyll`命令直接安装jekyll。
 
 执行命令安装：
 
@@ -124,6 +119,7 @@ which ruby
 $ gem install bundler
 ```
 
+新建文件夹，作为项目的根目录。
 在项目的根目录编写`Gemfile`文件来指定依赖：
 
 ```
@@ -144,11 +140,42 @@ $ bundle config mirror.https://rubygems.org https://gems.ruby-china.org
 $ bundle install
 ```
 
+_到这里，jekyll的环境就完成了_。
+
+## 初始化jekyll项目
+
+初始化的手段有两个，一个是跟着Jekyll官方的[快速入门指南][quickstart], 创建新的空的博客项目：
+
+```shell
+# Create a new Jekyll site at ./myblog
+~ $ jekyll new myblog
+
+# Change into your new directory
+~ $ cd myblog
+
+# Build the site on the preview server
+~/myblog $ bundle exec jekyll serve
+
+# Now browse to http://localhost:4000
+```
+
+另一种就是复制其他博主的Jekyll项目或者使用[jekyll主题][jekyllthemes]。我们可以通过观察项目的目录结构，对比[Jekyll的默认目录结构][structure]来判断。
+
+## Jekyll的基本用法
+
+jekyll的基本用法看[官方的文档][usage]就可以了
+
+## 
 
 ## 参考链接
 
 1. [https://rvm.io/][rvm]
-1.
+1. [https://www.ruby-lang.org/zh_cn/][Ruby]
+1. [https://rubygems.org/][RubyGems]
+1. [https://bundler.io/][bundler]
+1. [http://jekyllrb.com/][jekyll]
+1. [https://pages.github.com/][github pages]
+1. [http://git.mydoc.io/?t=154714][码云Pages]
 
 [jekyll]: http://jekyllrb.com/ "Jekyll"
 [码云Pages]: http://git.mydoc.io/?t=154714  "码云Pages"
@@ -157,3 +184,7 @@ $ bundle install
 [Ruby]: https://www.ruby-lang.org/zh_cn/ "Ruby"
 [RubyGems]: https://rubygems.org/ "RubyGems"
 [bundler]: https://bundler.io/ "bundler"
+[quickstart]: http://jekyllrb.com/docs/quickstart/ "quickstart"
+[jekyllthemes]: http://jekyllthemes.org/ "jekyllthemes"
+[structure]: https://jekyllrb.com/docs/structure/ "structure"
+[usage]: https://jekyllrb.com/docs/usage/ "usage"
