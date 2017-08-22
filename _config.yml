@@ -1,17 +1,5 @@
 # plugins
-plugins:
-   - jekyll-mentions
-   - jemoji
-   - jekyll-redirect-from
-   - jekyll-sitemap
-   - jekyll-feed
-
-gems:
-   - jekyll-mentions
-   - jemoji
-   - jekyll-redirect-from
-   - jekyll-sitemap
-   - jekyll-feed
+gems: ["jemoji"]
 
 # Site settings
 title: Raymond Blog
