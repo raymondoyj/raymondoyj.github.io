@@ -182,6 +182,10 @@ jekyll的基本用法看[官方的文档][usage]就可以了。
 
 github pages支持jemoji插件，在[github help][jekyll-plugins]有说明如何添加jekyll插件。:+1:
 
+## 网站统计
+
+网站统计功能就用百度的[网站统计][tongji]工具就好。
+
 ## 参考链接
 
 1. [https://rvm.io/][rvm]
@@ -193,6 +197,7 @@ github pages支持jemoji插件，在[github help][jekyll-plugins]有说明如何
 1. [http://git.mydoc.io/?t=154714][码云Pages]
 1. [https://www.netlify.com/][netlify]
 1. [https://github.com/imsun/gitment][gitment]
+1. [https://tongji.baidu.com][tongji]
 
 [jekyll]: http://jekyllrb.com/ "Jekyll"
 [码云Pages]: http://git.mydoc.io/?t=154714  "码云Pages"
@@ -208,3 +213,4 @@ github pages支持jemoji插件，在[github help][jekyll-plugins]有说明如何
 [netlify]: https://www.netlify.com/ "netlify"
 [gitment]: https://github.com/imsun/gitment "gitment"
 [jekyll-plugins]: https://help.github.com/articles/configuring-jekyll-plugins/ "jekyll-plugins"
+[tongji]: https://tongji.baidu.com "tongji"
