@@ -180,7 +180,7 @@ jekyll的基本用法看[官方的文档][usage]就可以了。
 
 ## emoji插件
 
-github pages支持jemoji插件，在[github help][jekyll-plugins]有说明如何添加jekyll插件。
+github pages支持jemoji插件，在[github help][jekyll-plugins]有说明如何添加jekyll插件。:+1:
 
 ## 参考链接
 
