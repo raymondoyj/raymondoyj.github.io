@@ -12,7 +12,7 @@ tags:
     - git
 ---
 
-> 按照惯例，在开始写博客的时候，都会写一篇如何搭建blog的指导教程:smile:。  
+> 按照惯例，在开始写博客的时候，都会写一篇如何搭建blog的指导教程。  
 > 本篇文章所搭建的博客是用[git](/2017/08/15/git-flow/)管理，用[markdown](/2015/07/31/Markdown-Syntax-CN/)写blog，用jekyll作为本地调式环境。
 
 ## 什么是Jekyll
@@ -180,11 +180,7 @@ jekyll的基本用法看[官方的文档][usage]就可以了。
 
 ## emoji插件
 
-github pages支持jemoji :apple: 插件，在[github help][jekyll-plugins]有说明如何添加jekyll插件。
-
-:smile:  
-:apple:
-:+1:
+github pages支持jemoji插件，在[github help][jekyll-plugins]有说明如何添加jekyll插件。
 
 ## 参考链接
 
