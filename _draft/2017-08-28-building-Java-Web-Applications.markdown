@@ -52,30 +52,37 @@ webdemo/
 _build.gradle_
 
 
-[source,groovy]
-----
-include::{samplescodedir}/webdemo/build.gradle[]
-----
-<1> Using the `war` plugin
-<2> Current release version of the servlet API
+```groovy
+plugins {
+    id 'java'
+    id 'war'
+}
 
-The `war` plugin adds the configurations `providedCompile` and `providedRuntime`, analogous to `compile` and `runtime` in regular Java applications, to represent dependencies that are needed locally but should not be added to the generated `webdemo.war` file.
+repositories {
+    jcenter()
+}
 
-The `plugins` syntax is used to apply the `java` and `war` plugins. No version is needed for either, since they are included with the Gradle distribution.
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    testCompile 'junit:junit:4.12'
+}
+```
 
-It is a good practice to generate a Gradle wrapper for the project by executing the `wrapper` task:
+`war`插件添加了configurations组的`providedCompile`和`providedRuntime`插件，类似于常见Java应用程序中的`compile`和`runtime`，来表示这些依赖在本地需要但不添加到生成的`webdemo.war`文件里。  
+这些插件的语法是用在`java`和`war`插件中。不需要版本，因为它们已经包含在Gradle的发布版里。
 
-[listing.terminal,subs="attributes"]
-----
-$ gradle wrapper --gradle-version={gradle-version}
+建议通过执行`wrapper`任务生成Gradle包装：
+
+```shell
+$ gradle wrapper --gradle-version=4.0
 :wrapper
-----
+```
 
-This will produce `gradlew` and `gradlew.bat` scripts and the `gradle` folder with the wrapper jar inside as described in the {user-manual}gradle_wrapper.html[wrapper section] of the User Manual.
+这会产生`gradlew`、`gradlew.bat`脚本和包含包装器的jar的`gradle`文件夹，详细查看用户手册的[`wrapper`章节](https://docs.gradle.org/4.0/userguide/gradle_wrapper.html)。
 
-NOTE: If you are using Gradle 4.0 or later you may see less output from the console that you might see in this guide. In this guide, output is shown using the `--console-plain` flag on the command-line. This is done to show the tasks that Gradle is executing.
+> 如果你使用的是Gradle4.0或以上，则你可能看到比本文更少的控制台输出。本文使用`--console-plain`命令行参数来调整输出信息。这是为了显示Gradle正在执行的任务。
 
-== Add a servlet and metadata to the project
+## Add a servlet and metadata to the project
 
 There are two options for defining web application metadata. Prior to version 3.0 of the servlet specification, metadata resided in a deployment descriptor called `web.xml` in the `WEB-INF` folder of the project. Since 3.0, the metadata can be defined using annotations.
 
