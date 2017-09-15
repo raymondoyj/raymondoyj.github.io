@@ -82,9 +82,9 @@ $ gradle wrapper --gradle-version=4.0
 
 > 如果你使用的是Gradle4.0或以上，则你可能看到比本文更少的控制台输出。本文使用`--console-plain`命令行参数来调整输出信息。这是为了显示Gradle正在执行的任务。
 
-## Add a servlet and metadata to the project
+## 向项目添加servlet和元数据
 
-There are two options for defining web application metadata. Prior to version 3.0 of the servlet specification, metadata resided in a deployment descriptor called `web.xml` in the `WEB-INF` folder of the project. Since 3.0, the metadata can be defined using annotations.
+定义Web应用的元数据有两个方式。在servlet3.0规范之前，元数据在项目的`WEB-INF/web.xml`中描述。3.0之后，元数据可以用注解来定义。
 
 Create a package folder `org/gradle/demo` below the `src/main/java` folder. Add a servlet file `HelloServlet.java`, with the following contents:
 
