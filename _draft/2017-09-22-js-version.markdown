@@ -1,14 +1,15 @@
 ---
 layout:     post
-title:      "ES5, ES6, ES2016, ES.Next: JavaScript 的版本是怎么回事？「译」"
-subtitle:   "ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?"
-date:       2015-09-22
-author:     "Hux"
-header-img: "img/post-bg-js-version.jpg"
+title:      "Java实现批量生成二维码并打包下载"
+subtitle:   ""
+date:       2017-09-22
+author:     "Raymond"
+header-img: "img/post-bg-js-module.jpg"
 tags:
-    - 前端开发
-    - JavaScript
-    - 翻译
+    - Java8
+    - zxing
+    - zip4j
+    - awt
 ---
 
 
