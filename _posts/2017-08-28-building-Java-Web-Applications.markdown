@@ -146,8 +146,6 @@ public class HelloServlet extends HttpServlet {
 
 `index.html`用一个链接提交HTTP GET请求，用表单提交HTTP POST请求。表单的`name`文本字段就是`doPost`接受的参数。
 
-In its `doPost` method, the servlet forwards control to another JSP page called `response.jsp`. Therefore define a file of that name inside `src/main/webapp` with the following contents:
-
 在`doPost`方法里，servlet将请求转发到另一个JSP页面`response.jsp`。所以要在`src/main/webapp`里定义那个文件，内容如下：
 
 _src/main/webapp/response.jsp_
