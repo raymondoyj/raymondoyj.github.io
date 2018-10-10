@@ -207,7 +207,6 @@ BUILD SUCCESSFUL
 
 ## 使用Mockito对servlet进行单元测试
 
-The open source http://site.mockito.org/[Mockito framework] makes it easy to unit test Java applications. Add the Mockito dependency to the `build.gradle` file under the `testCompile` configuration.
 开源的[Mockito framework](http://site.mockito.org/)可以很容易地对Java应用程序进行单元测试。将Mockito的依赖项添加到`build.gradle`的`testCompile`配置里。
 
 _添加Mockito包到`build.gradle`_
