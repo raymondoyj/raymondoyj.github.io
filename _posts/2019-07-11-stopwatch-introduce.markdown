@@ -12,60 +12,292 @@ tags:
 
 > 这篇文章转载自[Spring计时器StopWatch使用](https://blog.csdn.net/gxs1688/article/details/87185030)
 
+StopWatch是位于org.springframework.util包下的一个工具类，通过它可方便的对程序部分代码进行计时(ms级别)，适用于同步单线程代码块。  
+正常情况下，我们如果需要看某段代码的执行耗时，会通过如下的方式进行查看：  
 
-<div>
-    唉。今天恰巧有感，过来小聊几句。
-    <br>还是要先声明下：<b>所有言论出自个人，与阿里和我所在的团队无关。</b>
-    <br>
-    <br>
-    <br>正文。
-    <br>
-    <br>应该很多互联网公司都有这项 “福利” ——<b> 加班到X点以后，报销打车费</b>。
-    <br>阿里大约是晚上9点。
-    <br>
-    <br>初进阿里时还不习惯，想着6点下班后，吃个免费晚饭，赶快坐地铁回家。
-    <br>后来一是发现高峰期的地铁简直要命，二是确实有太多需求做不完， 平常经常会说： “这个我们晚上再谈…”
-    <br>
-    <br>所以晚上加班就成了公司里很多人的常态 ，就算今天 8 点多就已经工作得差不多了，也会习惯性得等到 9 点左右，<b>叫个车回家</b>。
-    <br>
-    <br>于是，每天 9 ～ 12 点间，公司里的叫车声、电话约车声、络绎不绝。我们团队私下里也有个微信群，用以和工作的旺旺群区分。<b>在打车软件玩起红包返现后，大家就都会在群里分享叫车红包，52个人的群，有时一分钟内不抢，红包就没了。</b>
-    <br>
-    <br>
-    <br>众所周知的，阿里和快的打车的关系。
-    <br>
-    <br>所以群里好像约定俗成般的，从来就没有出现过滴滴的红包。<b>而由于红包返现利滚利带来的超强用户粘性，大家连叫车也都开始只用快的了。</b>
-    <br>
-    <img class="shadow" src="/img/in-post/post-kuaidi-1.jpg" width="260">
-    结果好景不长，微信突然就玩了这么一手，直接把快的打车屏蔽了。
-    <br>当天大家就发现了，还讨论了下对策……<b>比如什么「先分享到微博，然后把链接复制出来，再发到旺旺群」……</b>
-    <br>
-    <br>嗯。我 TM 也觉得挺拼的。。
-    <br>于是大约微信群就沉寂了一天…
-    <br>
-    <br><b>然后才第二天……第一个滴滴红包就在群里出现了！</b>那时的文案还是什么：“<i>4个小伙伴，3个用滴滴！红包召唤新伙伴归队啦！</i>”
-    <br><b>我我我我当时就不由自主的纠结了一会儿 “价值观” ，放下手机 debug 去了……</b>
-    <br><b>等我再想起来，点开链接一看：特么的……「红包已抢完」。</b>
-    <br>
-    <br>。。。
-    <br><b>再后来。</b><b>就根本收不住了，滴滴红包那个飘。</b>
-    <br>
-    <br>
-    <br>唉其实我就是想说：<b>这也就一天……用户习惯就被彻底干翻过来了。 就算是盟友…也没救。</b>
-    <br>
-    <img class="shadow" src="/img/in-post/post-kuaidi-2.jpg" width="260">
-    所以我今天还是打着滴滴回来的……分享红包的一瞬间，心里突然一阵小惆怅。就回来写下了这段答案。
-    <br>
-    <br>说了半天，好像也没说到什么干货…权当故事听吧。
-    <br>其实你要问我这有没有违反互联网平等开放法则什么的。我觉得上面 <a data-hash="8f7d284bb1a97deaa4533a6190206ecb" href="http://www.zhihu.com/people/8f7d284bb1a97deaa4533a6190206ecb" class="member_mention" data-editable="true" data-title="@覃浩tommy" data-tip="p$b$8f7d284bb1a97deaa4533a6190206ecb">@覃浩tommy</a><a data-hash="43d639a3d763d3dad948e0bc4c645eec" href="http://www.zhihu.com/people/43d639a3d763d3dad948e0bc4c645eec" class="member_mention" data-editable="true" data-title="@赛门" data-tip="p$b$43d639a3d763d3dad948e0bc4c645eec">@赛门</a> 都说得挺好的，两种思路而已，大家可以自行选择。
-    <br>
-    <br>但是关于怎么看待，其实这次我以普通用户的身份来说……真心觉得：<b>「小良心小正义感在强需求面前真特么太弱了」</b><b>。</b><b>更何况这个强需求被干掉的同时还双手奉上了替代品。</b>
-    <br>
-    <br><b><u>所以大厂们你们就使劲撕逼吧，需要打到用户脸时，多给糖多给枣就好了。</u></b>
-    <br>
-    <br>
-    <br>哦对了，今天微信宣布朋友圈内限制分享未备案网页了。
-    <br><b>枣呢 ！？！？</b>
-    <br>
-    <br>
-</div>
+```java
+public static void main(String[] args) throws InterruptedException {
+     StopWatchTest.test0();
+//        StopWatchTest.test1();
+}
 
+public static void test0() throws InterruptedException {
+     long start = System.currentTimeMillis();
+     // do something
+     Thread.sleep(100);
+    long end = System.currentTimeMillis();
+    long start2 = System.currentTimeMillis();
+    // do something
+    Thread.sleep(200);
+    long end2 = System.currentTimeMillis();
+    System.out.println("某某1执行耗时:" + (end - start));
+    System.out.println("某某2执行耗时:" + (end2 - start2));
+}
+```
+
+```log
+运行结果：
+某某1执行耗时:105
+某某2执行耗时:203
+```
+
+该种方法通过获取执行完成时间与执行开始时间的差值得到程序的执行时间，简单直接有效，但想必写多了也是比较烦人的，尤其是碰到不可描述的代码时，会更加的让人忍不住多写几个bug聊表敬意，而且该结果也不够直观，此时会想是否有一个工具类，提供了这些方法，或者自己写个工具类，刚好可以满足这种场景，并且把结果更加直观的展现出来。  
+首先我们的需求如下：  
+
+1. 记录开始时间点
+2. 记录结束时间点
+3. 输出执行时间及各个时间段的占比
+
+根据该需求，我们可直接使用org.springframework.util包下的一个工具类StopWatch,通过该工具类，我们对上述代码做如下改造：  
+
+```java
+public static void main(String[] args) throws InterruptedException {
+//        StopWatchTest.test0();
+     StopWatchTest.test1();
+}
+
+public static void test1() throws InterruptedException {
+     StopWatch sw = new StopWatch("test");
+     sw.start("task1");
+     // do something
+    Thread.sleep(100);
+    sw.stop();
+    sw.start("task2");
+    // do something
+    Thread.sleep(200);
+    sw.stop();
+    System.out.println("sw.prettyPrint()~~~~~~~~~~~~~~~~~");
+    System.out.println(sw.prettyPrint());
+}
+```
+
+```log
+运行结果：
+sw.prettyPrint()~~~~~~~~~~~~~~~~~
+StopWatch 'test': running time (millis) = 308
+-----------------------------------------
+ms     %     Task name
+-----------------------------------------
+00104  034%  task1
+00204  066%  task2
+```
+
+start开始记录，stop停止记录，然后通过StopWatch的prettyPrint方法，可直观的输出代码执行耗时，以及执行时间百分比，瞬间感觉比之前的方式高大上了一个档次。  
+除此之外，还有以下两个方法shortSummary,getTotalTimeMillis，查看程序执行时间。
+运行代码及结果：  
+
+```log
+System.out.println("sw.shortSummary()~~~~~~~~~~~~~~~~~");
+System.out.println(sw.shortSummary());
+System.out.println("sw.getTotalTimeMillis()~~~~~~~~~~~~~~~~~");
+System.out.println(sw.getTotalTimeMillis());
+运行结果
+sw.shortSummary()~~~~~~~~~~~~~~~~~
+StopWatch 'test': running time (millis) = 308
+sw.getTotalTimeMillis()~~~~~~~~~~~~~~~~~
+308
+```
+
+其实以上内容在该工具类中实现也极其简单，通过start与stop方法分别记录开始时间与结束时间，其中在记录结束时间时，会维护一个链表类型的tasklist属性，从而使该类可记录多个任务，最后的输出也仅仅是对之前记录的信息做了一个统一的归纳输出，从而使结果更加直观的展示出来。  
+StopWatch优缺点：
+
+> 优点：
+
+1. spring自带工具类，可直接使用
+2. 代码实现简单，使用更简单
+3. 统一归纳，展示每项任务耗时与占用总时间的百分比，展示结果直观
+4. 性能消耗相对较小，并且最大程度的保证了start与stop之间的时间记录的准确性
+5. 可在start时直接指定任务名字，从而更加直观的显示记录结果
+
+> 缺点：
+
+1. 一个StopWatch实例一次只能开启一个task，不能同时start多个task，并且在该task未stop之前不能start一个新的task，必须在该task stop之后才能开启新的task，若要一次开启多个，需要new不同的StopWatch实例
+2. 代码侵入式使用，需要改动多处代码
+
+spring中StopWatch源码实现如下：  
+
+```java
+import java.text.NumberFormat;
+import java.util.LinkedList;
+import java.util.List;
+
+public class StopWatch {
+    private final String id;
+    private boolean keepTaskList = true;
+    private final List<TaskInfo> taskList = new LinkedList();
+    private long startTimeMillis;
+    private boolean running;
+    private String currentTaskName;
+    private StopWatch.TaskInfo lastTaskInfo;
+    private int taskCount;
+    private long totalTimeMillis;
+
+    public StopWatch() {
+        this.id = "";
+    }
+
+    public StopWatch(String id) {
+        this.id = id;
+    }
+
+    public void setKeepTaskList(boolean keepTaskList) {
+        this.keepTaskList = keepTaskList;
+    }
+
+    public void start() throws IllegalStateException {
+        this.start("");
+    }
+
+    public void start(String taskName) throws IllegalStateException {
+        if (this.running) {
+            throw new IllegalStateException("Can't start StopWatch: it's already running");
+        } else {
+            this.startTimeMillis = System.currentTimeMillis();
+            this.running = true;
+            this.currentTaskName = taskName;
+        }
+    }
+
+    public void stop() throws IllegalStateException {
+        if (!this.running) {
+            throw new IllegalStateException("Can't stop StopWatch: it's not running");
+        } else {
+            long lastTime = System.currentTimeMillis() - this.startTimeMillis;
+            this.totalTimeMillis += lastTime;
+            this.lastTaskInfo = new StopWatch.TaskInfo(this.currentTaskName, lastTime);
+            if (this.keepTaskList) {
+                this.taskList.add(this.lastTaskInfo);
+            }
+
+            ++this.taskCount;
+            this.running = false;
+            this.currentTaskName = null;
+        }
+    }
+
+    public boolean isRunning() {
+        return this.running;
+    }
+
+    public long getLastTaskTimeMillis() throws IllegalStateException {
+        if (this.lastTaskInfo == null) {
+            throw new IllegalStateException("No tasks run: can't get last task interval");
+        } else {
+            return this.lastTaskInfo.getTimeMillis();
+        }
+    }
+
+    public String getLastTaskName() throws IllegalStateException {
+        if (this.lastTaskInfo == null) {
+            throw new IllegalStateException("No tasks run: can't get last task name");
+        } else {
+            return this.lastTaskInfo.getTaskName();
+        }
+    }
+
+    public StopWatch.TaskInfo getLastTaskInfo() throws IllegalStateException {
+        if (this.lastTaskInfo == null) {
+            throw new IllegalStateException("No tasks run: can't get last task info");
+        } else {
+            return this.lastTaskInfo;
+        }
+    }
+
+    public long getTotalTimeMillis() {
+        return this.totalTimeMillis;
+    }
+
+    public double getTotalTimeSeconds() {
+        return (double) this.totalTimeMillis / 1000.0D;
+    }
+
+    public int getTaskCount() {
+        return this.taskCount;
+    }
+
+    public StopWatch.TaskInfo[] getTaskInfo() {
+        if (!this.keepTaskList) {
+            throw new UnsupportedOperationException("Task info is not being kept!");
+        } else {
+            return (StopWatch.TaskInfo[]) this.taskList.toArray(new StopWatch.TaskInfo[this.taskList.size()]);
+        }
+    }
+
+    public String shortSummary() {
+        return "StopWatch '" + this.id + "': running time (millis) = " + this.getTotalTimeMillis();
+    }
+
+    public String prettyPrint() {
+        StringBuilder sb = new StringBuilder(this.shortSummary());
+        sb.append('\n');
+        if (!this.keepTaskList) {
+            sb.append("No task info kept");
+        } else {
+            sb.append("-----------------------------------------\n");
+            sb.append("ms     %     Task name\n");
+            sb.append("-----------------------------------------\n");
+            NumberFormat nf = NumberFormat.getNumberInstance();
+            nf.setMinimumIntegerDigits(5);
+            nf.setGroupingUsed(false);
+            NumberFormat pf = NumberFormat.getPercentInstance();
+            pf.setMinimumIntegerDigits(3);
+            pf.setGroupingUsed(false);
+            StopWatch.TaskInfo[] var7;
+            int var6 = (var7 = this.getTaskInfo()).length;
+
+            for (int var5 = 0; var5 < var6; ++var5) {
+                StopWatch.TaskInfo task = var7[var5];
+                sb.append(nf.format(task.getTimeMillis())).append("  ");
+                sb.append(pf.format(task.getTimeSeconds() / this.getTotalTimeSeconds())).append("  ");
+                sb.append(task.getTaskName()).append("\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(this.shortSummary());
+        if (this.keepTaskList) {
+            StopWatch.TaskInfo[] var5;
+            int var4 = (var5 = this.getTaskInfo()).length;
+
+            for (int var3 = 0; var3 < var4; ++var3) {
+                StopWatch.TaskInfo task = var5[var3];
+                sb.append("; [").append(task.getTaskName()).append("] took ").append(task.getTimeMillis());
+                long percent = Math.round(100.0D * task.getTimeSeconds() / this.getTotalTimeSeconds());
+                sb.append(" = ").append(percent).append("%");
+            }
+        } else {
+            sb.append("; no task info kept");
+        }
+
+        return sb.toString();
+    }
+
+    public static final class TaskInfo {
+        private final String taskName;
+        private final long timeMillis;
+
+        TaskInfo(String taskName, long timeMillis) {
+            this.taskName = taskName;
+            this.timeMillis = timeMillis;
+        }
+
+        public String getTaskName() {
+            return this.taskName;
+        }
+
+        public long getTimeMillis() {
+            return this.timeMillis;
+        }
+
+        public double getTimeSeconds() {
+            return (double) this.timeMillis / 1000.0D;
+        }
+    }
+
+}
+```
+  
