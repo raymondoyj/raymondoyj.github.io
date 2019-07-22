@@ -5,6 +5,7 @@ subtitle:   "XXL-JOB Documentation"
 date:       2019-07-19 
 author:     "xuxueli"
 header-img: "img/post-bg-e2e-ux.jpg"
+catalog: true
 tags:
     - XXL-JOB
     - 分布式任务调度平台
