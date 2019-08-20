@@ -5,6 +5,7 @@ subtitle:   "Object Graph Navigation Language"
 date:       2019-08-20 
 author:     "Drew Davidson"
 header-img: "img/post-bg-e2e-ux.jpg"
+catalog: true
 tags:
     - OGNL
 ---
