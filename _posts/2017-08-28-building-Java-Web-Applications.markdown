@@ -4,6 +4,7 @@ title:      "gradle构建Java web应用"
 date:       2017-08-28 12:00:00
 author:     "Raymond"
 header-img: "img/post-bg-rwd.jpg"
+catalog: true
 tags:
     - gradle
 ---

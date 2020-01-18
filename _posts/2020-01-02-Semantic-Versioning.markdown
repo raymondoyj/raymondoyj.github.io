@@ -5,6 +5,7 @@ subtitle:   ""
 date:       2020-01-02
 author:     "Wayou Liu"
 header-img: "img/post-bg-js-module.jpg"
+catalog: true
 tags:
     - 语义化版本
     - Semantic Versioning

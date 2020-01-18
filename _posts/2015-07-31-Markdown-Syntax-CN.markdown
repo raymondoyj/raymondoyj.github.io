@@ -4,6 +4,7 @@ title:      "Markdown 语法说明 (简体中文版) "
 date:       2015-07-31 11:54:00
 author:     "riku"
 header-img: "img/post-bg-miui6.jpg"
+catalog: true
 tags:
     - 转载
     - Markdown
