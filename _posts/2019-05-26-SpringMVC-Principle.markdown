@@ -8,7 +8,7 @@ tags:
     - SpringMVC
 ---
 
-> 转自：https://snailclimb.gitee.io/javaguide/#/docs/system-design/framework/spring/SpringMVC-Principle
+> 转自：<https://snailclimb.gitee.io/javaguide/#/docs/system-design/framework/spring/SpringMVC-Principle>
 
 <iframe src="https://ghbtns.com/github-btn.html?user=Snailclimb&repo=JavaGuide&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
 
