@@ -11,6 +11,8 @@ tags:
     - SpringMVC
 ---
 
+<iframe src="https://ghbtns.com/github-btn.html?user=seaswalker&repo=spring-analysis&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
@@ -85,7 +87,7 @@ tags:
 
 spring-mvc的核心便是DispatcherServlet，所以初始化也是围绕其展开的。类图:
 
-![DispatcherServlet类图](images/DispatcherServlet.jpg)
+![DispatcherServlet类图](/img/in-post/post-spring-mvc/DispatcherServlet.jpg)
 
 Servlet标准定义了init方法是其生命周期的初始化方法。
 
@@ -267,7 +269,7 @@ ApplicationContextInitializer允许我们在Spring(mvc)容器初始化之前干�
 
 applyInitializers方法正是要触发这些坏事儿。类图:
 
-![ApplicationContextInitializer类图](images/ApplicationContextInitializer.jpg)
+![ApplicationContextInitializer类图](/img/in-post/post-spring-mvc/ApplicationContextInitializer.jpg)
 
 #### 配置解析
 
@@ -291,7 +293,7 @@ applyInitializers方法正是要触发这些坏事儿。类图:
 
 对于spring-mvc来说，其容器默认为XmlWebApplicationContext，部分类图:
 
-![XmlWebApplicationContext类图](images/XmlWebApplicationContext.jpg)
+![XmlWebApplicationContext类图](/img/in-post/post-spring-mvc/XmlWebApplicationContext.jpg)
 
 XmlWebApplicationContext通过重写loadBeanDefinitions方法改变了bean加载行为，使其指向spring-servlet.xml。
 
@@ -316,7 +318,7 @@ public void init() {
 
 其parse方法负责向Sprng容器注册一些必要的组件，整理如下图:
 
-![mvc-annotation](images/mvc-annotation.png)
+![mvc-annotation](/img/in-post/post-spring-mvc/mvc-annotation.png)
 
 ##### 静态资源处理
 
@@ -423,7 +425,7 @@ private void initMultipartResolver(ApplicationContext context) {
 
 MultipartResolver用于开启Spring MVC文件上传功能，其类图:
 
-![MultipartResolver类图](images/MultipartResolver.jpg)
+![MultipartResolver类图](/img/in-post/post-spring-mvc/MultipartResolver.jpg)
 
 也就是说，如果我们要使用文件上传功能，须在容器中注册一个MultipartResolver bean。当然，默认是没有的。
 
@@ -437,7 +439,7 @@ spring-mvc采用了属性文件的方式配置默认策略(即bean)，此文件�
 
 ThemeResolver接口配合Spring标签库使用可以通过动态决定使用的css以及图片的方式达到换肤的效果，其类图:
 
-![ThemeResolver类图](images/ThemeResolver.jpg)
+![ThemeResolver类图](/img/in-post/post-spring-mvc/ThemeResolver.jpg)
 
 如果容器中不存在叫做themeResolver的bean，initThemeResolver方法将向容器中注册FixedThemeResolver，此bean只能提供一套默认的主题，名为theme。
 
@@ -476,7 +478,7 @@ http://localhost:8080/gamecast/display.html -> display(视图)
 
 其类图:
 
-![RequestToViewNameTranslator类图](images/RequestToViewNameTranslator.jpg)
+![RequestToViewNameTranslator类图](/img/in-post/post-spring-mvc/RequestToViewNameTranslator.jpg)
 
 ### ViewResolver检查
 
@@ -486,7 +488,7 @@ http://localhost:8080/gamecast/display.html -> display(视图)
 
 initFlashMapManager方法会向容器注册SessionFlashMapManager对象，类图:
 
-![FlashMapManager类图](images/FlashMapManager.jpg)
+![FlashMapManager类图](/img/in-post/post-spring-mvc/FlashMapManager.jpg)
 
 此接口和FlashMap搭配使用，用于在**请求重定向时保存/传递参数**。
 
@@ -498,7 +500,7 @@ initFlashMapManager方法会向容器注册SessionFlashMapManager对象，类图
 
 此实现根据@Controller和@RequestMapping注解完成解析。类图(忽略部分接口):
 
-![RequestMappingHandlerMapping类图](images/RequestMappingHandlerMapping.jpg)
+![RequestMappingHandlerMapping类图](/img/in-post/post-spring-mvc/RequestMappingHandlerMapping.jpg)
 
 初始化的入口位于AbstractHandlerMethodMapping的afterPropertiesSet方法和AbstractHandlerMapping的initApplicationContext方法，afterPropertiesSet调用了initHandlerMethods:
 
@@ -531,7 +533,7 @@ detectHandlerMethods方法将反射遍历类中所有的public方法，如果方
 
 内部类AbstractHandlerMethodMapping.MappingRegistry是映射的载体，类图:
 
-![MappingRegistry类图](images/MappingRegistry.jpg)
+![MappingRegistry类图](/img/in-post/post-spring-mvc/MappingRegistry.jpg)
 
 其register方法简略版源码:
 
@@ -582,7 +584,7 @@ register方法中urlLookup其实就是将paths属性中的每个path都与处理
 
 getNamingStrategy方法得到的是一个HandlerMethodMappingNamingStrategy接口的实例，此接口用以根据HandlerMethod得到一个名字，类图:
 
-![HandlerMethodMappingNamingStrategy类图](images/HandlerMethodMappingNamingStrategy.jpg)
+![HandlerMethodMappingNamingStrategy类图](/img/in-post/post-spring-mvc/HandlerMethodMappingNamingStrategy.jpg)
 
 比如对于我们的控制器,SimpleController.echo方法，最终得到的名字将是SC#echo。
 
@@ -619,13 +621,13 @@ protected void initApplicationContext() throws BeansException {
 
 作用就是从容器中获取所有MappedInterceptor bean并放到adaptedInterceptors中，前面提到过了，我们使用mvc:interceptor定义的拦截器其实就是MappedInterceptor对象。类图:
 
-![MappedInterceptor类图](images/MappedInterceptor.jpg)
+![MappedInterceptor类图](/img/in-post/post-spring-mvc/MappedInterceptor.jpg)
 
 ## HandlerAdapter初始化
 
 同样，我们以RequestMappingHandlerAdapter为例进行说明，类图:
 
-![RequestMappingHandlerAdapter类图](images/RequestMappingHandlerAdapter.jpg)
+![RequestMappingHandlerAdapter类图](/img/in-post/post-spring-mvc/RequestMappingHandlerAdapter.jpg)
 
 显然，入口在afterPropertiesSet方法:
 
@@ -662,7 +664,7 @@ initControllerAdviceCache方法用以解析并存储标注了@ControllerAdvice�
 
 HandlerMethodArgumentResolver即参数解析器，负责从request中解析、得到Controller方法所需的参数。afterPropertiesSet方法设置了一组默认的解析器。具体是哪些参考getDefaultArgumentResolvers方法。类图:
 
-![HandlerMethodArgumentResolver类图](images/HandlerMethodArgumentResolver.jpg)
+![HandlerMethodArgumentResolver类图](/img/in-post/post-spring-mvc/HandlerMethodArgumentResolver.jpg)
 
 ### @InitBinder支持
 
@@ -676,7 +678,7 @@ getDefaultInitBinderArgumentResolvers返回了一组默认使用的转换器，�
 
 HandlerMethodReturnValueHandler接口用以处理方法调用(Controller方法)的返回值，类图:
 
-![HandlerMethodReturnValueHandler类图](images/HandlerMethodReturnValueHandler.jpg)
+![HandlerMethodReturnValueHandler类图](/img/in-post/post-spring-mvc/HandlerMethodReturnValueHandler.jpg)
 
 getDefaultReturnValueHandlers方法便返回了一坨这东西。
 
@@ -914,7 +916,7 @@ public String getParameterName() {
 
 显然，参数名的获取由接口ParameterNameDiscoverer完成:
 
-![ParameterNameDiscoverer](images/ParameterNameDiscoverer.jpg)
+![ParameterNameDiscoverer](/img/in-post/post-spring-mvc/ParameterNameDiscoverer.jpg)
 
 默认采用DefaultParameterNameDiscoverer，但此类其实相当于StandardReflectionParameterNameDiscoverer和LocalVariableTableParameterNameDiscoverer的组合，且前者先于后者进行解析。
 
@@ -940,15 +942,15 @@ public String[] getParameterNames(Method method) {
 
 LocalVariableTableParameterNameDiscoverer利用了ASM直接访问class文件中的本地变量表来得到变量名，下面是使用`javap -verbose`命令得到的本地变量表示例:
 
-![本地变量表](images/local_variable_tables.PNG)
+![本地变量表](/img/in-post/post-spring-mvc/local_variable_tables.PNG)
 
 但是默认情况下javac compiler是不生成本地变量表这种调试信息的，需要加`-g`参数才可以，那为什么在我们的测试Controller中却可以获得呢，玄机就在于idea的下列设置:
 
-![idea编译设置](images/idea_debug_info.PNG)
+![idea编译设置](/img/in-post/post-spring-mvc/idea_debug_info.PNG)
 
 取消这项设置的勾选再次运行程序便出问题了:
 
-![调试信息错误](images/debug_info_error.PNG)
+![调试信息错误](/img/in-post/post-spring-mvc/debug_info_error.PNG)
 
 #### Model
 
@@ -977,7 +979,7 @@ public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer m
 
 忽略各种调用关系，**Model其实是一个BindingAwareModelMap对象，且每次请求(需要注入Model的前提下)都有一个新的该对象生成**。类图:
 
-![BindingAwareModelMap类图](images/BindingAwareModelMap.jpg)
+![BindingAwareModelMap类图](/img/in-post/post-spring-mvc/BindingAwareModelMap.jpg)
 
 #### 总结
 
@@ -1063,7 +1065,7 @@ private void processDispatchResult(HttpServletRequest request, HttpServletRespon
 
 回过头来看一下这到底是个什么东西。类图:
 
-![ModelAndView类图](images/ModelAndView.jpg)
+![ModelAndView类图](/img/in-post/post-spring-mvc/ModelAndView.jpg)
 
 很直白。
 
@@ -1104,7 +1106,7 @@ resolveViewName方法将会遍历所有的ViewResolver bean，只要有一个解
 
 类图(忽略实现类):
 
-![ViewResolver类图](images/ViewResolver.jpg)
+![ViewResolver类图](/img/in-post/post-spring-mvc/ViewResolver.jpg)
 
 resolveViewName方法的源码不再贴出，其实只做了一件事: 用反射创建并初始化我们指定的View，根据我们的配置，就是JstlView。
 
@@ -1112,7 +1114,7 @@ resolveViewName方法的源码不再贴出，其实只做了一件事: 用反射
 
 类图:
 
-![JstlView类图](images/JstlView.jpg)
+![JstlView类图](/img/in-post/post-spring-mvc/JstlView.jpg)
 
 渲染的核心逻辑位于InternalResourceView.renderMergedOutputModel，简略版源码:
 
@@ -1151,7 +1153,7 @@ protected void renderMergedOutputModel(
 
 Spring的HttpMessageConverter接口负责HTTP请求-Java对象与Java对象-响应之间的转换。我们以Spring默认使用的Jackson转换器为例，类图:
 
-![HttpMessageConverter](images/HttpMessageConverter.jpg)
+![HttpMessageConverter](/img/in-post/post-spring-mvc/HttpMessageConverter.jpg)
 
 HttpMessageConverter实现的初始化由AnnotationDrivenBeanDefinitionParser的getMessageConverters方法完成，HttpMessageConverter的来源分为自定义和默认。
 
@@ -1240,15 +1242,15 @@ public boolean canWrite(Class<?> clazz, MediaType mediaType) {
 
 Spring MVC中参数到各种类型的转换由HandlerMethodArgumentResolver接口完成，而Controller返回值到真正的响应的转换由HandlerMethodReturnValueHandler接口完成。两者分别负责Spring MVC中数据的输入与输出，可用下图表示:
 
-![Spring MVC输入输出转换](images/mvc_input_output.PNG)
+![Spring MVC输入输出转换](/img/in-post/post-spring-mvc/mvc_input_output.PNG)
 
 HandlerMethodArgumentResolver接口及其主要实现类如下图:
 
-![HandlerMethodArgumentResolver](images/HandlerMethodArgumentResolver_all.jpg)
+![HandlerMethodArgumentResolver](/img/in-post/post-spring-mvc/HandlerMethodArgumentResolver_all.jpg)
 
 HandlerMethodReturnValueHandler接口以及主要实现类如下:
 
-![HandlerMethodReturnValueHandler](images/HandlerMethodReturnValueHandler_all.jpg)
+![HandlerMethodReturnValueHandler](/img/in-post/post-spring-mvc/HandlerMethodReturnValueHandler_all.jpg)
 
 其实有很多类同时实现了两个接口，比如RequestResponseBodyMethodProcessor，这样的类一般以Processor结尾。
 
@@ -1286,7 +1288,7 @@ public String echo(SimpleModel simpleModel, Model model) {
 
 经过测试可以发现，SimpleModel参数既可以接收get请求，也可以接收post请求。那么在这种情况下请求参数是被哪个参数解析器解析的呢，debug发现: ServletModelAttributeMethodProcessor：
 
-![ServletModelAttributeMethodProcessor](images/ServletModelAttributeMethodProcessor.jpg)
+![ServletModelAttributeMethodProcessor](/img/in-post/post-spring-mvc/ServletModelAttributeMethodProcessor.jpg)
 
 核心的supportsParameter方法由父类ModelAttributeMethodProcessor实现:
 
@@ -1336,11 +1338,11 @@ ModelAndViewContainer是个什么东西呢，从名字就可以看出就，它�
 
 这里使用到了DataBinder接口，按照注释的说明，此接口用以**向执行的对象中设置属性值**，就是这么简单，其继承体系如下图:
 
-![DataBinder](images/DataBinder.jpg)
+![DataBinder](/img/in-post/post-spring-mvc/DataBinder.jpg)
 
 WebDataBinderFactory接口用以创建WebDataBinder对象，其继承体系如下图:
 
-![WebDataBinderFactory](images/WebDataBinderFactory.jpg)
+![WebDataBinderFactory](/img/in-post/post-spring-mvc/WebDataBinderFactory.jpg)
 
 默认使用的是ServletRequestDataBinderFactory，创建了一个ExtendedServletRequestDataBinder对象:
 
@@ -1421,7 +1423,7 @@ public void validate(Object... validationHints) {
 
 可见，具体的校验交给了`org.springframework.validation.Validator`实现，类图:
 
-![Validator](images/Validator.png)
+![Validator](/img/in-post/post-spring-mvc/Validator.png)
 
 getValidators方法获取的实际上是DataBinder内部的validators字段:
 
